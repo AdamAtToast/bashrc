@@ -4,7 +4,6 @@ export EDITOR=emacs
 # The current directory in green
 export PS1=\\[\\e\[32m\\]\\w\\[\\e\[0m\\]\ \$\ 
 
-# Cygwin bash shell
 if [ "." == "${ORIGINAL_PATH}." ]; then
     export ORIGINAL_PATH=${PATH}
 else
@@ -15,9 +14,9 @@ fi
 [ -e $(brew --prefix)/etc/bash_completion ] && . $(brew --prefix)/etc/bash_completion
 
 ##  Common extras on the ls command
-alias ls='ls -hF${MY_LS_COLOR}'
-alias ll='ls -lhoAF${MY_LS_COLOR}'
-alias la='ls -hAF${MY_LS_COLOR}'
+alias ls='ls -hFG'
+alias ll='ls -lhoAFG'
+alias la='ls -hAFG'
 
 alias lsdir="ls -aF | grep / | sed -e 's:/::'"
 alias dirtree='tree -d'
@@ -27,26 +26,11 @@ if [ $TERM = dumb ]; then
     alias more='cat'
     alias less='cat'
 else
-    # Set the pager environment variable for man, more and less
-    # NOTE: -gX does not work on solaris...
     LESS_MOD=Xr
-    MY_LS_COLOR=' --color'
 
     export PAGER="less -g$LESS_MOD"
     alias less="less -g$LESS_MOD"
     alias more='less'                     # less is more!
-
-    if [ $TERM == "xterm"* -o $TERM = eterm-color ]; then
-        export LESS_TERMCAP_mb=$(tput setaf 2)
-        export LESS_TERMCAP_md=$(tput setaf 1)
-        export LESS_TERMCAP_me=$(tput sgr0)
-        export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4) # yellow on blue
-        export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
-        export LESS_TERMCAP_us=$(tput smul; tput setaf 4)
-        export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
-        export LESS_TERMCAP_mr=$(tput rev)
-        export LESS_TERMCAP_mh=$(tput dim)
-    fi
 fi
 
 function repo-clean {
@@ -61,7 +45,7 @@ function pp {
 }
 
 function rgrep {
-    find . -type f -printf "\"%p\"\n" | grep -v \.git/ | grep -v \.csproj\.user | grep -v -e "^.*\.\(obj\|dll\|pdb\|exe\|lib\|resources\)\"$" | xargs grep "$*"
+    find . -type f | grep -v \.git/ | xargs grep "$*"
 }
 
 function add_to_path {
@@ -71,3 +55,6 @@ function add_to_path {
         [[ ":$PATH:" != *":$1:"* ]] && PATH="$1:${PATH}"
     fi
 }
+
+add_to_path ${HOME}/bin
+

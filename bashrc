@@ -1,5 +1,5 @@
 # Always call my adjustments first
-[[ -f ~/.dotfiles/adam ]] && . ~/.dotfiles/adam
+[[ -f ~/.dotfiles/adam.sh ]] && . ~/.dotfiles/adam.sh
 
 
 # Custom variables not in source control
