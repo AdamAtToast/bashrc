@@ -1,0 +1,15 @@
+# postgres variables
+export PGUSER=postgres
+export PGPASS=admin
+export PGHOST=localhost
+export PGPORT=5432
+export PGDATABASE=toast_dev
+export TOAST_DEV_DB=toast_dev
+export DB_TOAST_DEV="postgres://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${TOAST_DEV_DB}"
+
+# Password for 'postgres' user when starting Docker
+export POSTGRES_PASSWORD=admin
+export PGPASSWORD=admin
+
+export PLAY_JPA_DDL=none
+export PLAY_HTTPS_PORT=8443

@@ -1,0 +1,13 @@
+export TOAST=${HOME}/Toast
+export TOAST_GIT=${TOAST}/git-repos
+export ANDROID_HOME=${HOME}/Library/Android/sdk
+export PATH=${PATH}:${TOAST_GIT}/play1:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+export M2_LOCAL=${HOME}/.m2
+
+if [ -d ${HOME}/perl5/lib/perl5 ]; then
+  export PERL5LIB=${HOME}/perl5/lib/perl5
+fi
+
+if [ -d ${HOME}/perl5/bin ]; then
+  export PATH=${PATH}:${HOME}/perl5/bin
+fi
